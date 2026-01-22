@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'routes.dart';
+
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blueAccent,
+        body: Center(
+          
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.only(bottom: 70.0),
+                child: const Text(
+                  'Register Page',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                width: 300,
+                
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: 'Username',
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+              ),
+              Container(
+                width: 300,
+                margin: const EdgeInsets.all(20),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    labelText: 'Password',
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+              ),
+            
+              Container(
+                margin: const EdgeInsets.all(20),
+                height: 55,
+                child: ElevatedButton(
+                  child: const Text("To Login Page"),
+                  onPressed: (){
+                    Navigator.pushNamed(context, Routes.LoginPage);
+                  },
+                  style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                  padding: EdgeInsets.symmetric(horizontal: 60, vertical: 13),
+                  textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusGeometry.circular(15),
+                  ),
+                  elevation: 5,
+                  shadowColor: Colors.black.withOpacity(0.5)
+                ),
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
+  }
+}
