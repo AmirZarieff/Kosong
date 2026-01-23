@@ -24,6 +24,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   'Hey there!',
                   style: TextStyle(
                     fontSize: 30,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -33,7 +34,29 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   'I Forgor!',
                   style: TextStyle(
                     fontSize: 40,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container( // USERNAME INPUT-------------------------------------------------------------------------------------------
+                width: 350,
+                child: TextFormField(
+                  cursorColor: Colors.blue,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(vertical: 13, horizontal: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(7),
+                      borderSide: BorderSide(color: Colors.grey, width: 2)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(7),
+                      borderSide: BorderSide(color: Colors.blue, width: 3)
+                    ),
+                    hintText: 'Enter your email',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                 ),
               ),

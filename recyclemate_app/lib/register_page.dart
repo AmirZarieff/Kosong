@@ -28,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               Container( // TEXT WELCOME BACK-------------------------------------------------------------------------------------------
-                margin: const EdgeInsets.only(bottom:70.0),
+                margin: const EdgeInsets.only(bottom:50.0),
                 child: const Text(
                   'Create an Account',
                   style: TextStyle(
