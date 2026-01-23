@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recyclemate_app/forget_password.dart';
 import 'routes.dart';
 import 'login_page.dart';
 import 'register_page.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         routes: {
           Routes.LoginPage: (context) => const LoginPage(),
           Routes.RegisterPage: (context) => const RegisterPage(),
+          Routes.ForgetPassword: (context) => const ForgetPassword(),
         });
   }
 }
