@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../services/routes.dart';
 
 class HomePageDummy extends StatefulWidget {
-  const HomePageDummy({Key? key}) : super(key: key);
+  const HomePageDummy({super.key});
 
   @override
   State<HomePageDummy> createState() => _HomePageDummyState();
@@ -123,6 +123,18 @@ class _HomePageDummyState extends State<HomePageDummy> {
               margin: EdgeInsets.only(top: 50),
               width: 200,
               child: ElevatedButton(
+                onPressed: _isLoading ? null : _signOut,
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.redAccent,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 5,
+                  shadowColor: Colors.black.withOpacity(0.3),
+                ),
                 child: _isLoading
                     ? SizedBox(
                         height: 20,
@@ -140,18 +152,6 @@ class _HomePageDummyState extends State<HomePageDummy> {
                           Text('Sign Out'),
                         ],
                       ),
-                onPressed: _isLoading ? null : _signOut,
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  elevation: 5,
-                  shadowColor: Colors.black.withOpacity(0.3),
-                ),
               ),
             ),
             

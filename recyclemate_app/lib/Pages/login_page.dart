@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:recyclemate_app/Pages/forget_password.dart';
-
-
 import '../services/routes.dart';
 
+
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -22,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
   String? _errorMessage;
 
- 
+  
 
   // FIREBASE AUTHENTICATION FOR SIGN IN BUTTON
   Future<void> signIn() async {
@@ -163,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 
-                Container(
+                SizedBox(
                   width: 380,
                   child: TextFormField(
                     controller: emailController,
@@ -257,17 +256,6 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsets.only(top: 25),
                   width: 380,
                   child: ElevatedButton(
-                    child: _isLoading
-                        ? SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : const Text("Login"),
                     onPressed: _isLoading ? null : signIn,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -282,6 +270,17 @@ class _LoginPageState extends State<LoginPage> {
                       elevation: 5,
                       shadowColor: Colors.black.withOpacity(0.5),
                     ),
+                    child: _isLoading
+                        ? SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          )
+                        : const Text("Login"),
                   ),
                 ),
                 Container(
@@ -312,71 +311,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 350,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Colors.white,
-                          thickness: 1,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Text(
-                          "or",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: Colors.white,
-                          thickness: 1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 40),
-                  width: 350,
-                  child: ElevatedButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'lib/images/googleIcon.png',
-                          height: 24,
-                          width: 24,
-                        ),
-                        SizedBox(width: 12),
-                        const Text(
-                          "Continue with Google",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 13),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      elevation: 5,
-                      shadowColor: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                )
               ],
             ),
           ),

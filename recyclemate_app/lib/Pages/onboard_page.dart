@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/routes.dart';
 
 class OnStart extends StatefulWidget {
-  const OnStart({Key? key}) : super(key: key);
+  const OnStart({super.key});
 
   @override
   State<OnStart> createState() => _OnStartState();
