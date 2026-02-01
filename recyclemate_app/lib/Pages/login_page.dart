@@ -14,6 +14,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  //Initialize variable for form validation and sign in authentication
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -95,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  // Designing the login page screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,8 +107,8 @@ class _LoginPageState extends State<LoginPage> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF004E92),
-              Color(0xFF000428),
+              Color(0xFF4CAF50),
+              Color(0xFF2196F3),
             ],
           ),
         ),
@@ -116,7 +119,22 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.only(top: 150.0),
+                  margin: EdgeInsets.only(top: 100),
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white.withOpacity(0.3), width: 2)
+                  ),
+                  child: Icon(
+                    Icons.eco,
+                    size: 50,
+                    color: Colors.white,
+                  ),
+                ),
+                Container( // HEY THERE TEXT
+                  margin: const EdgeInsets.only(top: 20.0),
                   child: const Text(
                     'Hey there!',
                     style: TextStyle(
@@ -125,8 +143,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 70.0),
+                Container( //WELCOME BACK TEXT
+                  margin: const EdgeInsets.only(bottom: 50.0),
                   child: const Text(
                     'Welcome Back',
                     style: TextStyle(
@@ -136,8 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                
-                // Error Message Display
+                // ERROR MESSAGE DISPLAY IF THE USER ENTER WRONG PASSWORD
                 if (_errorMessage != null)
                   Container(
                     width: 380,
@@ -161,10 +178,9 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                
-                SizedBox(
+                Container( // EMAIL USER INPUT
                   width: 380,
-                  child: TextFormField(
+                  child: TextFormField( 
                     controller: emailController,
                     cursorColor: Colors.white,
                     style: TextStyle(
@@ -172,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     decoration: InputDecoration(
                       contentPadding:
-                          EdgeInsets.symmetric(vertical: 13, horizontal: 10),
+                          EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
                         borderSide: BorderSide(color: Colors.white, width: 2),
@@ -193,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                             : null,
                   ),
                 ),
-                Container(
+                Container( // PASSWORD INPUT USER
                   width: 380,
                   margin: EdgeInsets.only(top: 30),
                   child: TextFormField(
@@ -205,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
                       contentPadding:
-                          EdgeInsets.symmetric(vertical: 13, horizontal: 10),
+                        EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
                         borderSide: BorderSide(color: Colors.white, width: 2),
@@ -225,10 +241,11 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       return null;
                     },
+                  
                   ),
                 ),
-                SizedBox(height: 12),
-                Row(
+                SizedBox(height: 5),
+                Row(//
                   children: [
                     Spacer(),
                     TextButton(
@@ -242,14 +259,15 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         "Forgot Password?",
                         style: TextStyle(
-                          color: Colors.blue,
+                          color: Colors.white,
                           decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          decorationColor: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
                         ),
                       ),
                     ),
-                    SizedBox(width: 15)
+                    SizedBox(width: 10)
                   ],
                 ),
                 Container(
@@ -258,10 +276,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : signIn,
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blueAccent,
+                      foregroundColor: Colors.blueAccent,
+                      backgroundColor: Colors.white,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 60, vertical: 13),
+                          EdgeInsets.symmetric(horizontal: 60, vertical: 16),
                       textStyle:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       shape: RoundedRectangleBorder(
@@ -283,8 +301,38 @@ class _LoginPageState extends State<LoginPage> {
                         : const Text("Login"),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 15, bottom: 30),
+                SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 160, // Fixed width instead of Expanded
+                        child: Divider(
+                          color: Colors.white.withOpacity(0.3),
+                          thickness: 1,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          "OR",
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.7),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 160, // Fixed width instead of Expanded
+                        child: Divider(
+                          color: Colors.white.withOpacity(0.3),
+                          thickness: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                Container( //DOESNT HAVE ACCOUNT YET TEXT
+                  margin: EdgeInsets.only(top: 25, bottom: 30),
                   child: RichText(
                     text: TextSpan(
                       children: [
@@ -292,14 +340,17 @@ class _LoginPageState extends State<LoginPage> {
                           text: 'Do not have an account yet? ',
                           style: TextStyle(
                             color: Colors.white,
+                            fontSize: 15,
                           ),
                         ),
                         TextSpan(
-                          text: 'Sign Up',
+                          text: 'Create an account',
                           style: TextStyle(
-                            color: Colors.blueAccent,
+                            color: Colors.white,
+                            fontSize: 15,
                             decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.w500,
+                            decorationColor: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {

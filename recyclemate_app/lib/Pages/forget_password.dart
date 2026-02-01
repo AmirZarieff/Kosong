@@ -91,8 +91,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
@@ -113,12 +114,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ],
           ),
         ),
-        child: SafeArea(
-          child: SingleChildScrollView(
             child: Column(
               children: [
                 // Header Section
                 Container(
+                  margin : EdgeInsets.only(top: 100),
                   padding: EdgeInsets.all(40),
                   child: Column(
                     children: [
@@ -328,32 +328,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           ),
                         ),
                         
-                        SizedBox(height: 20),
-                        
-                        // Back to Login
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                              SizedBox(width: 8),
-                              Text(
-                                'Back to Login',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        
+
                         SizedBox(height: 40),
                         
                         // Help Text
@@ -402,7 +377,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           ),
                         ),
                         
-                        SizedBox(height: 40),
                       ],
                     ),
                   ),
@@ -410,8 +384,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               ],
             ),
           ),
-        ),
-      ),
-    );
+         );
+    
   }
 }

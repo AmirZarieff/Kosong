@@ -108,8 +108,6 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
         ),
-        child: SafeArea(
-          child: SingleChildScrollView(
             child: Column(
               children: [
                 // Header Section
@@ -368,69 +366,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(height: 25),
                         
                         // Password Requirements
-                        Container(
-                          padding: EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.2),
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Password Requirements:',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle,
-                                    color: passwordController.text.length >= 8 
-                                        ? Colors.green : Colors.white.withOpacity(0.3),
-                                    size: 16,
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    'At least 8 characters',
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.8),
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle,
-                                    color: passwordController.text.isNotEmpty && 
-                                           confirmPasswordController.text.isNotEmpty &&
-                                           passwordController.text == confirmPasswordController.text
-                                        ? Colors.green : Colors.white.withOpacity(0.3),
-                                    size: 16,
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    'Passwords match',
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.8),
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        
                         
                         SizedBox(height: 30),
                         
@@ -442,7 +378,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Color(0xFF9C27B0),
                               backgroundColor: Colors.white,
-                              padding: EdgeInsets.symmetric(vertical: 18),
+                              padding: EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -451,7 +387,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             child: _isLoading
                                 ? SizedBox(
-                                    height: 24,
+                                    height: 16,
                                     width: 24,
                                     child: CircularProgressIndicator(
                                       strokeWidth: 3,
@@ -512,7 +448,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             children: [
                               TextSpan(
-                                text: 'Sign In',
+                                text: 'Log In',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -542,7 +478,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         
-                        SizedBox(height: 40),
+                        SizedBox(height: 60),
                       ],
                     ),
                   ),
@@ -550,8 +486,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ],
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }
