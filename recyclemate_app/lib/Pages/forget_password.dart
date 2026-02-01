@@ -110,7 +110,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             end: Alignment.bottomCenter,
             colors: [
               Color(0xFF2196F3), // Blue
-              Color(0xFF4CAF50), // Green
+              Color.fromARGB(255, 39, 176, 39), // Green
             ],
           ),
         ),
@@ -153,7 +153,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         'Enter your email address and we\'ll send you\na link to reset your password',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white,
                           fontSize: 16,
                           height: 1.5,
                         ),
@@ -247,14 +247,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           ),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 18,
+                              vertical: 16,
                               horizontal: 20,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                color: Colors.white.withOpacity(0.5),
-                                width: 1.5,
+                                color: Colors.white,
+                                width: 2,
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
@@ -266,13 +266,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             ),
                             hintText: 'Enter your email address',
                             hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.1),
                             prefixIcon: Icon(
                               Icons.email,
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                           ),
                           keyboardType: TextInputType.emailAddress,
@@ -293,7 +293,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Color(0xFF2196F3),
                               backgroundColor: Colors.white,
-                              padding: EdgeInsets.symmetric(vertical: 18),
+                              padding: EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -368,7 +368,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                 '• The link will expire in 24 hours\n'
                                 '• Make sure you enter the email associated with your account',
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
+                                  color: Colors.white,
                                   fontSize: 13,
                                   height: 1.6,
                                 ),

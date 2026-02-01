@@ -107,13 +107,17 @@ class _OnStartState extends State<OnStart> {
             ),
           ),
           SizedBox(height: 20),
-          Text(
-            page['description'],
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
-              fontSize: 16,
-              height: 1.5,
+          // Description with adjustable horizontal margin
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              page['description'],
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.9),
+                fontSize: 16,
+                height: 1.5,
+              ),
             ),
           ),
         ],
@@ -123,10 +127,15 @@ class _OnStartState extends State<OnStart> {
 
   Widget _buildBottomSection() {
     return Padding(
-      padding: const EdgeInsets.all(40.0),
+      padding: const EdgeInsets.only(
+        left: 40.0,
+        right: 40.0,
+        top: 50.0, // Reduced top padding to move everything up
+        bottom: 80.0,
+      ),
       child: Column(
         children: [
-          // Dots indicator
+          // Dots indicator moved up by reducing SizedBox height below it
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
@@ -134,7 +143,7 @@ class _OnStartState extends State<OnStart> {
               (index) => Container(
                 width: _currentPage == index ? 25 : 10,
                 height: 10,
-                margin: EdgeInsets.symmetric(horizontal: 4),
+                margin: EdgeInsets.symmetric(horizontal: 3),
                 decoration: BoxDecoration(
                   color: _currentPage == index 
                       ? Colors.white 
@@ -144,7 +153,7 @@ class _OnStartState extends State<OnStart> {
               ),
             ),
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 70), // Reduced from 40 to 30
           
           // Next/Get Started button
           SizedBox(
@@ -152,7 +161,7 @@ class _OnStartState extends State<OnStart> {
             child: ElevatedButton(
               onPressed: () {
                 if (_currentPage == _pages.length - 1) {
-                  Navigator.pushReplacementNamed(context, Routes.LoginPage);
+                  Navigator.pushReplacementNamed(context, Routes.RegisterPage);
                 } else {
                   _pageController.nextPage(
                     duration: Duration(milliseconds: 300),
@@ -179,49 +188,56 @@ class _OnStartState extends State<OnStart> {
             ),
           ),
           
-          SizedBox(height: 20),
+          SizedBox(height: 15), // Reduced from 20 to 15
           
           // Skip/Sign In button
           if (_currentPage < _pages.length - 1)
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, Routes.LoginPage);
-              },
-              child: Text(
-                'Skip',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+            Padding(
+              padding: EdgeInsets.only(top: 5), // Add small padding for skip button
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, Routes.LoginPage);
+                },
+                child: Text(
+                  'Skip',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
           if (_currentPage == _pages.length - 1)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Already have an account? ',
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
-                    fontSize: 14,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, Routes.LoginPage);
-                  },
-                  child: Text(
-                    'Sign In',
+            Padding(
+              padding: EdgeInsets.only(top: 10), // Add small padding for sign in section
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Already have an account? ',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.white.withOpacity(0.9),
                       fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
                     ),
                   ),
-                ),
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, Routes.LoginPage);
+                    },
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
         ],
       ),

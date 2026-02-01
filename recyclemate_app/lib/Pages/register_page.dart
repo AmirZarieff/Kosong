@@ -103,8 +103,8 @@ class _RegisterPageState extends State<RegisterPage> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF9C27B0), // Purple from onboarding
-              Color(0xFFFF9800), // Orange from onboarding
+              Color.fromARGB(255, 39, 176, 39), // Purple from onboarding
+              Color.fromARGB(255, 211, 155, 71), // Orange from onboarding
             ],
           ),
         ),
@@ -112,6 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 // Header Section
                 Container(
+                  margin: EdgeInsets.only(top: 40),
                   padding: EdgeInsets.all(40),
                   child: Column(
                     children: [
@@ -134,10 +135,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       SizedBox(height: 30),
                       Text(
-                        'Create Account',
+                        'Create an Account',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 32,
+                          fontSize: 35,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -156,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 
                 // Form Section
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Form(
                     key: formKey,
                     child: Column(
@@ -196,7 +197,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         
                         // Email Field
-                        TextFormField(
+                        Container(
+                        width: 380,
+                        child: TextFormField(
                           controller: emailController,
                           cursorColor: Colors.white,
                           style: TextStyle(
@@ -205,13 +208,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 18,
+                              vertical: 16,
                               horizontal: 20,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white,
                                 width: 1.5,
                               ),
                             ),
@@ -224,13 +227,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             hintText: 'Email address',
                             hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.1),
                             prefixIcon: Icon(
                               Icons.email,
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                           ),
                           keyboardType: TextInputType.emailAddress,
@@ -239,12 +242,15 @@ class _RegisterPageState extends State<RegisterPage> {
                               email != null && !EmailValidator.validate(email)
                                   ? 'Please enter a valid email'
                                   : null,
-                        ),
-                        
+                        )
+                      ),
+                      
                         SizedBox(height: 20),
                         
                         // Password Field
-                        TextFormField(
+                      Container(
+                        width: 380,
+                        child: TextFormField(
                           controller: passwordController,
                           style: TextStyle(
                             color: Colors.white,
@@ -254,13 +260,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 18,
+                              vertical: 16,
                               horizontal: 20,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white,
                                 width: 1.5,
                               ),
                             ),
@@ -273,18 +279,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             hintText: 'Password',
                             hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.1),
                             prefixIcon: Icon(
                               Icons.lock,
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -297,7 +303,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           validator: (value) => value != null && value.length < 8
                               ? 'Password must be at least 8 characters'
                               : null,
-                        ),
+                        )
+                      ),
                         
                         SizedBox(height: 20),
                         
@@ -312,13 +319,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 18,
+                              vertical: 16,
                               horizontal: 20,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white,
                                 width: 1.5,
                               ),
                             ),
@@ -331,18 +338,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             hintText: 'Confirm password',
                             hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.1),
                             prefixIcon: Icon(
                               Icons.lock_outline,
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white,
                             ),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -376,11 +383,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: ElevatedButton(
                             onPressed: _isLoading ? null : signUp,
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Color(0xFF9C27B0),
+                              foregroundColor: Colors.blueAccent,
                               backgroundColor: Colors.white,
-                              padding: EdgeInsets.symmetric(vertical: 16),
+                              padding: EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(7),
                               ),
                               elevation: 5,
                               shadowColor: Colors.black.withOpacity(0.2),
@@ -399,7 +406,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 : Text(
                                     "Create Account",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -443,7 +450,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           text: TextSpan(
                             text: 'Already have an account? ',
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white,
                               fontSize: 15,
                             ),
                             children: [
@@ -472,13 +479,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             'By creating an account, you agree to our Terms of Service and Privacy Policy',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.6),
+                              color: Colors.white,
                               fontSize: 12,
                             ),
                           ),
                         ),
-                        
-                        SizedBox(height: 60),
                       ],
                     ),
                   ),

@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   
+  bool _obscurePassword = true;
   bool _isLoading = false;
   String? _errorMessage;
 
@@ -107,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF4CAF50),
+              Color.fromARGB(255, 39, 176, 39),
               Color(0xFF2196F3),
             ],
           ),
@@ -148,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text(
                     'Welcome Back',
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 35,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -180,69 +181,108 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 Container( // EMAIL USER INPUT
                   width: 380,
-                  child: TextFormField( 
-                    controller: emailController,
-                    cursorColor: Colors.white,
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide: BorderSide(color: Colors.white, width: 2),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide: BorderSide(color: Colors.white, width: 3),
-                      ),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(color: Colors.white),
-                      filled: true,
-                      fillColor: Colors.transparent,
-                    ),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (email) =>
-                        email != null && !EmailValidator.validate(email)
-                            ? 'Enter a valid email'
-                            : null,
-                  ),
+                  child: TextFormField(
+                          controller: emailController,
+                          cursorColor: Colors.white,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 20,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 2,
+                              ),
+                            ),
+                            hintText: 'Email address',
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.1),
+                            prefixIcon: Icon(
+                              Icons.email,
+                              color: Colors.white,
+                            ),
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (email) =>
+                              email != null && !EmailValidator.validate(email)
+                                  ? 'Please enter a valid email'
+                                  : null,
+                        ),
                 ),
                 Container( // PASSWORD INPUT USER
                   width: 380,
-                  margin: EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.only(top: 20),
                   child: TextFormField(
-                    controller: passwordController,
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    obscureText: true,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      contentPadding:
-                        EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide: BorderSide(color: Colors.white, width: 2),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide: BorderSide(color: Colors.white, width: 3),
-                      ),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.white),
-                      filled: true,
-                      fillColor: Colors.transparent,
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter password';
-                      }
-                      return null;
-                    },
-                  
-                  ),
+                          controller: passwordController,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                          obscureText: _obscurePassword,
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 20,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 2,
+                              ),
+                            ),
+                            hintText: 'Password',
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.1),
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.white,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => value != null && value.length < 8
+                              ? 'Password must be at least 8 characters'
+                              : null,
+                        ),
                 ),
                 SizedBox(height: 5),
                 Row(//
@@ -271,7 +311,7 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 25),
+                  margin: const EdgeInsets.only(top: 50),
                   width: 380,
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : signIn,
@@ -362,6 +402,17 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+                SizedBox(height: 15),
+
+                //
+                Text(
+                  'By signing in, you agree to our Terms of Service\nand Privacy Policy',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.8),
+                    fontSize: 12,
+                  ),
+                )
               ],
             ),
           ),
