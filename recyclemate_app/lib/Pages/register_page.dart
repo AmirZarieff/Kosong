@@ -596,7 +596,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ..onTap = () {
                                   Navigator.pushNamed(
                                     context,
-                                    Routes.LoginPage,
+                                    Routes.loginPage,
                                   );
                                 },
                             ),

@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text.trim(),
       );
 
-      Navigator.pushNamed(context, Routes.HomePageDummy);
+      Navigator.pushNamed(context, Routes.homePageDummy);
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
