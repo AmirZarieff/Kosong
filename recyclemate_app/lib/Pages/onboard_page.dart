@@ -16,25 +16,29 @@ class _OnStartState extends State<OnStart> {
   final List<Map<String, dynamic>> _pages = [
     {
       'title': 'Welcome to RecycleMate',
-      'description': 'Your smart recycling companion that makes sustainability simple and rewarding.',
+      'description':
+          'Your smart recycling companion that makes sustainability simple and rewarding.',
       'icon': Icons.eco,
       'color': Color(0xFF4CAF50), // Green
     },
     {
       'title': 'Smart Waste Sorting',
-      'description': 'Scan items with your camera and get instant recycling instructions.',
+      'description':
+          'Scan items with your camera and get instant recycling instructions.',
       'icon': Icons.camera_alt,
       'color': Color(0xFF2196F3), // Blue
     },
     {
       'title': 'Earn Eco-Points',
-      'description': 'Get rewarded for recycling and redeem points for exciting gifts.',
+      'description':
+          'Get rewarded for recycling and redeem points for exciting gifts.',
       'icon': Icons.card_giftcard,
       'color': Color(0xFF9C27B0), // Purple
     },
     {
       'title': 'Track Your Impact',
-      'description': 'See how your recycling efforts contribute to a greener planet.',
+      'description':
+          'See how your recycling efforts contribute to a greener planet.',
       'icon': Icons.trending_up,
       'color': Color(0xFFFF9800), // Orange
     },
@@ -79,49 +83,50 @@ class _OnStartState extends State<OnStart> {
 
   // Mini Pages Content.
   Widget _buildPage(Map<String, dynamic> page) {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white.withOpacity(0.3), width: 2),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.3),
+                  width: 2,
+                ),
+              ),
+              child: Icon(page['icon'], size: 70, color: Colors.white),
             ),
-            child: Icon(
-              page['icon'],
-              size: 70,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(height: 40),
-          Text(
-            page['title'],
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 20),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              page['description'],
+            SizedBox(height: 40),
+            Text(
+              page['title'],
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white.withOpacity(0.9),
-                fontSize: 16,
-                height: 1.5,
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-        ],
+            SizedBox(height: 20),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                page['description'],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.9),
+                  fontSize: 16,
+                  height: 1.5,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -132,7 +137,7 @@ class _OnStartState extends State<OnStart> {
       padding: const EdgeInsets.only(
         left: 40.0,
         right: 40.0,
-        top: 50.0, 
+        top: 50.0,
         bottom: 80.0,
       ),
       child: Column(
@@ -146,8 +151,8 @@ class _OnStartState extends State<OnStart> {
                 height: 10,
                 margin: EdgeInsets.symmetric(horizontal: 3),
                 decoration: BoxDecoration(
-                  color: _currentPage == index 
-                      ? Colors.white 
+                  color: _currentPage == index
+                      ? Colors.white
                       : Colors.white.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -155,7 +160,7 @@ class _OnStartState extends State<OnStart> {
             ),
           ),
           SizedBox(height: 70),
-          
+
           // Next/Get Started button.
           SizedBox(
             width: double.infinity,
@@ -181,16 +186,13 @@ class _OnStartState extends State<OnStart> {
               ),
               child: Text(
                 _currentPage == _pages.length - 1 ? 'GET STARTED' : 'NEXT',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
           ),
-          
+
           SizedBox(height: 15),
-          
+
           // Skip/Sign In button.
           if (_currentPage < _pages.length - 1)
             Padding(
@@ -211,7 +213,7 @@ class _OnStartState extends State<OnStart> {
             ),
           if (_currentPage == _pages.length - 1)
             Padding(
-              padding: EdgeInsets.only(top: 10), 
+              padding: EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
