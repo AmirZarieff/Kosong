@@ -7,8 +7,8 @@ import 'Pages/login_page.dart';
 import 'Pages/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 void main() async{
+  //Initialize Firebase 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'Inter',
         ),
-        // home: const MyHomePage(title: 'Flutter Form Widget'),
         initialRoute: Routes.OnStart,
         routes: {
           Routes.OnStart: (context) => OnStart(),

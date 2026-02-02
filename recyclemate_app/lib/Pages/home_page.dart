@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 import '../services/routes.dart';
 
 class HomePageDummy extends StatefulWidget {
@@ -17,46 +18,23 @@ class _HomePageDummyState extends State<HomePageDummy> {
   @override
   void initState() {
     super.initState();
-    _getCurrentUser();
-  }
-
-  Future<void> _getCurrentUser() async {
-    setState(() {
-      _user = _auth.currentUser;
-    });
+    _user = _auth.currentUser;
   }
 
   Future<void> _signOut() async {
-    setState(() {
-      _isLoading = true;
-    });
-
+    setState(() => _isLoading = true);
     try {
       await _auth.signOut();
-      
-      // Navigate back to login page after sign out
-      Navigator.pushNamed(context, Routes.OnStart);
-      
+      Navigator.pushNamedAndRemoveUntil(context, Routes.OnStart, (route) => false);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Signed out successfully'),
-          backgroundColor: Colors.green,
-        ),
+        const SnackBar(content: Text('Signed out successfully'), backgroundColor: Colors.green),
       );
     } catch (e) {
-      print('Error signing out: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error signing out: $e'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text('Error signing out: $e'), backgroundColor: Colors.red),
       );
     } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -65,20 +43,11 @@ class _HomePageDummyState extends State<HomePageDummy> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          'Home',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text('Home', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: _signOut,
-            tooltip: 'Sign Out',
-          ),
+          IconButton(icon: const Icon(Icons.logout), onPressed: _signOut, tooltip: 'Sign Out'),
         ],
       ),
       backgroundColor: Colors.white,
@@ -86,24 +55,54 @@ class _HomePageDummyState extends State<HomePageDummy> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Real-time Username Display using StreamBuilder
+            StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(_user?.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Text("Error loading name");
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+
+                // Extract username from the Firestore document
+                String displayName = "User";
+                if (snapshot.hasData && snapshot.data!.exists) {
+                  Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                  displayName = data['username'] ?? "User";
+                }
+
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    'Hi, $displayName!',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 32,
+                      color: Color.fromARGB(255, 39, 176, 39),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                );
+              },
+            ),
+
             Container(
-              margin: const EdgeInsets.only(top: 50, bottom: 30),
+              margin: const EdgeInsets.only(bottom: 30),
               child: const Text(
-                'Hi! HomePage',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Color.fromARGB(255, 125, 39, 39),
-                  fontWeight: FontWeight.bold,
-                ),
+                'Welcome to RecycleMate',
+                style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             ),
             
-            // Display user email if available
             if (_user != null && _user!.email != null)
               Container(
-                margin: EdgeInsets.only(bottom: 30),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   color: Colors.blue[50],
                   borderRadius: BorderRadius.circular(10),
@@ -111,40 +110,28 @@ class _HomePageDummyState extends State<HomePageDummy> {
                 ),
                 child: Text(
                   'Logged in as: ${_user!.email}',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.blue[800],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.blue[800]),
                 ),
               ),
             
-            // Large sign out button
-            Container(
-              margin: EdgeInsets.only(top: 50),
+            SizedBox(
               width: 200,
               child: ElevatedButton(
                 onPressed: _isLoading ? null : _signOut,
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.redAccent,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   elevation: 5,
-                  shadowColor: Colors.black.withOpacity(0.3),
                 ),
                 child: _isLoading
-                    ? SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
+                    ? const SizedBox(
+                        height: 20, width: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
                       )
-                    : Row(
+                    : const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.logout, size: 20),
@@ -155,45 +142,17 @@ class _HomePageDummyState extends State<HomePageDummy> {
               ),
             ),
             
-            // Additional smaller sign out option
-            SizedBox(height: 30),
-            TextButton(
-              onPressed: _signOut,
-              child: Text(
-                'Sign Out from here',
-                style: TextStyle(
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-            
-            // Status indicator
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: _isLoading
-                  ? Column(
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(height: 10),
-                        Text('Signing out...', style: TextStyle(color: Colors.grey)),
-                      ],
-                    )
-                  : null,
-            ),
+            const SizedBox(height: 100),
           ],
         ),
       ),
       
-      // Floating Action Button for sign out (optional)
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _signOut,
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
-        icon: Icon(Icons.logout),
-        label: Text('Sign Out'),
+        icon: const Icon(Icons.logout),
+        label: const Text('Quick Logout'),
         heroTag: 'signOutFab',
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

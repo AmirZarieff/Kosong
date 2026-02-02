@@ -17,6 +17,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   String? _errorMessage;
   String? _successMessage;
 
+
+  // Validation and Reset Password Function.
   Future resetPassword() async {
     if (!formKey.currentState!.validate()) {
       return;
@@ -162,7 +164,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   ),
                 ),
                 
-                // Form Section
+                // Success and Error message pop.
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   child: Form(
@@ -237,7 +239,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             ),
                           ),
                         
-                        // Email Field
+                        // Email User Input.
                         TextFormField(
                           controller: emailController,
                           cursorColor: Colors.white,
@@ -264,6 +266,25 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                 width: 2,
                               ),
                             ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.white, // Keep white border even in error
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.white, // Keep white border even in focused error
+                                width: 2,
+                              ),
+                            ),
+                            errorStyle: TextStyle(
+                              color: Colors.redAccent, // White text for error message
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold
+                            ),
                             hintText: 'Enter your email address',
                             hintStyle: TextStyle(
                               color: Colors.white,
@@ -285,7 +306,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         
                         SizedBox(height: 30),
                         
-                        // Reset Password Button
+                        // Reset Password Button.
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -331,7 +352,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
                         SizedBox(height: 40),
                         
-                        // Help Text
+                        // Help Description in a Box Text.
                         Container(
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(

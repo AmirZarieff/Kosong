@@ -12,6 +12,7 @@ class _OnStartState extends State<OnStart> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
+  // Mini Pages Setup.
   final List<Map<String, dynamic>> _pages = [
     {
       'title': 'Welcome to RecycleMate',
@@ -76,6 +77,7 @@ class _OnStartState extends State<OnStart> {
     );
   }
 
+  // Mini Pages Content.
   Widget _buildPage(Map<String, dynamic> page) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
@@ -107,7 +109,6 @@ class _OnStartState extends State<OnStart> {
             ),
           ),
           SizedBox(height: 20),
-          // Description with adjustable horizontal margin
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
@@ -125,17 +126,17 @@ class _OnStartState extends State<OnStart> {
     );
   }
 
+  // Bottom side including dot and next button as well as the skip.
   Widget _buildBottomSection() {
     return Padding(
       padding: const EdgeInsets.only(
         left: 40.0,
         right: 40.0,
-        top: 50.0, // Reduced top padding to move everything up
+        top: 50.0, 
         bottom: 80.0,
       ),
       child: Column(
         children: [
-          // Dots indicator moved up by reducing SizedBox height below it
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
@@ -153,9 +154,9 @@ class _OnStartState extends State<OnStart> {
               ),
             ),
           ),
-          SizedBox(height: 70), // Reduced from 40 to 30
+          SizedBox(height: 70),
           
-          // Next/Get Started button
+          // Next/Get Started button.
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -188,12 +189,12 @@ class _OnStartState extends State<OnStart> {
             ),
           ),
           
-          SizedBox(height: 15), // Reduced from 20 to 15
+          SizedBox(height: 15),
           
-          // Skip/Sign In button
+          // Skip/Sign In button.
           if (_currentPage < _pages.length - 1)
             Padding(
-              padding: EdgeInsets.only(top: 5), // Add small padding for skip button
+              padding: EdgeInsets.only(top: 5),
               child: TextButton(
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, Routes.LoginPage);
@@ -210,7 +211,7 @@ class _OnStartState extends State<OnStart> {
             ),
           if (_currentPage == _pages.length - 1)
             Padding(
-              padding: EdgeInsets.only(top: 10), // Add small padding for sign in section
+              padding: EdgeInsets.only(top: 10), 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

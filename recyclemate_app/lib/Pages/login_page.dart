@@ -1,9 +1,10 @@
+import '../services/routes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:recyclemate_app/Pages/forget_password.dart';
-import '../services/routes.dart';
+
 
 
 class LoginPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  //Initialize variable for form validation and sign in authentication
+  //Initialize variable for form validation and sign in authentication.
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
 
   
 
-  // FIREBASE AUTHENTICATION FOR SIGN IN BUTTON
+  // Firebase authentication, validation and sign in.
   Future<void> signIn() async {
     if (!formKey.currentState!.validate()) {
       return;
@@ -64,8 +65,11 @@ class _LoginPageState extends State<LoginPage> {
         case 'too-many-requests':
           errorMessage = 'Too many attempts. Please try again later.';
           break;
+        case 'network-request-failed':
+          errorMessage = 'Network error. Please check your internet connection.';
+          break;
         default:
-          errorMessage = 'An error occurred. Please try again.';
+          errorMessage = 'Authentication failed. Please check your credentials.';
       }
       
       setState(() {
@@ -79,6 +83,12 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.red,
         ),
       );
+    } on FirebaseException catch (e) {
+
+    // Handle other Firebase-specific errors.
+    setState(() {
+      _errorMessage = 'Firebase error: ${e.message}';
+    }); 
     } catch (e) {
       setState(() {
         _errorMessage = 'An unexpected error occurred.';
@@ -90,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  
+  //Cleans up resources to prevent memory leaks, cancels any ongoing operations and releases system resources.
   @override
   void dispose() {
     emailController.dispose();
@@ -102,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: Container( //Background Gradient Colors.
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -119,6 +129,8 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+
+                // Icon header.
                 Container(
                   margin: EdgeInsets.only(top: 100),
                   width: 100,
@@ -134,7 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                   ),
                 ),
-                Container( // HEY THERE TEXT
+
+                // Hey there! text display.
+                Container( 
                   margin: const EdgeInsets.only(top: 20.0),
                   child: const Text(
                     'Hey there!',
@@ -144,7 +158,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Container( //WELCOME BACK TEXT
+
+                // Welcome Back text display.
+                Container( 
                   margin: const EdgeInsets.only(bottom: 50.0),
                   child: const Text(
                     'Welcome Back',
@@ -155,7 +171,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                // ERROR MESSAGE DISPLAY IF THE USER ENTER WRONG PASSWORD
+
+                // Error message display if the user throws an error.
                 if (_errorMessage != null)
                   Container(
                     width: 380,
@@ -179,112 +196,156 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                Container( // EMAIL USER INPUT
+
+                // Email User input.
+                Container( 
                   width: 380,
                   child: TextFormField(
-                          controller: emailController,
-                          cursorColor: Colors.white,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 16,
-                              horizontal: 20,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 1.5,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            ),
-                            hintText: 'Email address',
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                            filled: true,
-                            fillColor: Colors.white.withOpacity(0.1),
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: Colors.white,
-                            ),
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (email) =>
-                              email != null && !EmailValidator.validate(email)
-                                  ? 'Please enter a valid email'
-                                  : null,
+                    controller: emailController,
+                    cursorColor: Colors.white,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 20,
                         ),
-                ),
-                Container( // PASSWORD INPUT USER
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1.5,
+                          ),
+                        ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 2,
+                          ),
+                        ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.white, 
+                          width: 1.5,
+                          ),
+                        ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: Colors.white, 
+                          width: 2,
+                          ),
+                        ),
+                      errorStyle: TextStyle(
+                        color: Colors.redAccent, 
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold
+                        ),
+                      hintText: 'Email address',
+                      hintStyle: TextStyle(
+                        color: Colors.white,
+                        ),
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.1),
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Colors.white,
+                        ),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (email) =>
+                          email != null && !EmailValidator.validate(email)
+                              ? 'Please enter a valid email!'
+                              : null,
+                    ),
+                  ),
+
+                // Password Input User.  
+                Container( 
                   width: 380,
                   margin: EdgeInsets.only(top: 20),
                   child: TextFormField(
-                          controller: passwordController,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                          obscureText: _obscurePassword,
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 16,
-                              horizontal: 20,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 1.5,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            ),
-                            hintText: 'Password',
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                            filled: true,
-                            fillColor: Colors.white.withOpacity(0.1),
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: Colors.white,
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _obscurePassword = !_obscurePassword;
-                                });
-                              },
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value != null && value.length < 8
-                              ? 'Password must be at least 8 characters'
-                              : null,
-                        ),
+                    controller: passwordController,
+                    style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                    obscureText: _obscurePassword,
+                    cursorColor: Colors.white,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 20,
+                      ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 1.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Colors.white, // Keep white border even in error
+                        width: 1.5,
+                      ),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Colors.white, // Keep white border even in focused error
+                        width: 2,
+                      ),
+                    ),
+                    errorStyle: TextStyle(
+                      color: Colors.redAccent, // White text for error message
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold
+                    ),
+                    hintText: 'Password',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: Colors.white,
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                  ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => value != null && value.length < 8
+                        ? 'Password must be at least 8 characters'
+                        : null,
+                  ),
                 ),
                 SizedBox(height: 5),
+
+                //Forgot Password Text Button.
                 Row(//
                   children: [
                     Spacer(),
@@ -293,7 +354,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ForgetPassword()),
+                            builder: (context) => ForgetPassword()),
                         );
                       },
                       child: Text(
@@ -310,8 +371,10 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(width: 10)
                   ],
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 50),
+
+                // Login Button.
+                Container( 
+                  margin: const EdgeInsets.only(top: 30),
                   width: 380,
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : signIn,
@@ -319,9 +382,9 @@ class _LoginPageState extends State<LoginPage> {
                       foregroundColor: Colors.blueAccent,
                       backgroundColor: Colors.white,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 60, vertical: 16),
+                        EdgeInsets.symmetric(horizontal: 60, vertical: 16),
                       textStyle:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusGeometry.circular(7),
                       ),
@@ -342,28 +405,30 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 160, // Fixed width instead of Expanded
-                        child: Divider(
-                          color: Colors.white.withOpacity(0.3),
-                          thickness: 1,
+
+                // OR divider.
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 160, 
+                      child: Divider(
+                        color: Colors.white.withOpacity(0.3),
+                        thickness: 1,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Text(
+                        "OR",
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                          fontSize: 14,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          "OR",
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.7),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
+                    ),
                       Container(
-                        width: 160, // Fixed width instead of Expanded
+                        width: 160, 
                         child: Divider(
                           color: Colors.white.withOpacity(0.3),
                           thickness: 1,
@@ -371,7 +436,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                Container( //DOESNT HAVE ACCOUNT YET TEXT
+
+                // Does not have an account yet text button.
+                Container( 
                   margin: EdgeInsets.only(top: 25, bottom: 30),
                   child: RichText(
                     text: TextSpan(
@@ -402,9 +469,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+
                 SizedBox(height: 15),
 
-                //
+                // TOS & PP.
                 Text(
                   'By signing in, you agree to our Terms of Service\nand Privacy Policy',
                   textAlign: TextAlign.center,
