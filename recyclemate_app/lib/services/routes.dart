@@ -8,4 +8,6 @@ class Routes {
   static const String scanHistoryScreen = '/scan-history';
   static const String searchPage = '/search';
   static const String educationalGuide = '/educational-guide';
+  static const String activityTracker = '/activity-tracker';
+  static const String progressSummary = '/progress-summary';
 }

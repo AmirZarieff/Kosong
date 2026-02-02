@@ -10,6 +10,8 @@ import 'Pages/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/scan_history_screen.dart';
 import 'screens/scan_screen.dart';
+import 'screens/activity_tracker_screen.dart';
+import 'screens/progress_summary_screen.dart';
 
 void main() async {
   // Initialize Firebase
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
         Routes.scanHistoryScreen: (context) => const ScanHistoryScreen(),
         Routes.searchPage: (context) => const SearchPage(),
         Routes.educationalGuide: (context) => const EducationalGuidePage(),
+        Routes.activityTracker: (context) => const ActivityTrackerScreen(),
+        Routes.progressSummary: (context) => const ProgressSummaryScreen(),
       },
     );
   }

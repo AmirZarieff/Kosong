@@ -179,6 +179,17 @@ class _HomePageDummyState extends State<HomePageDummy> {
                         Navigator.pushNamed(context, Routes.scanHistoryScreen),
                   ),
 
+                  // Activity Tracker Card
+                  _buildFeatureCard(
+                    context,
+                    icon: Icons.bar_chart,
+                    title: 'Activity Tracker',
+                    description: 'Track your recycling progress',
+                    color: Colors.teal,
+                    onTap: () =>
+                        Navigator.pushNamed(context, Routes.activityTracker),
+                  ),
+
                   // Search Feature Card
                   _buildFeatureCard(
                     context,
