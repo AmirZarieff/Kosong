@@ -1670,3 +1670,222 @@ Routes:
 **Status:** ✅ Ready for Production
 
 
+
+
+
+
+
+
+
+# Weekly Progress Reports - RecycleMate Project
+
+**Student Name:** Muhammad Amir Zarieff  
+**GitHub Repository:** https://github.com/AmirZarieff/RecycleMate  
+**Project:** RecycleMate - Recycling Activity Tracker
+
+---
+
+## Week 1: December 8, 2025
+
+### Project Stage
+Ideation & Initiation
+
+### Assigned Tasks
+Muhammad Amir Zarieff: Project ideation and concept development, initial repository setup, basic project structure planning
+
+### Completion (%)
+20%
+
+### Problems
+Still finalizing the core features and scope of the application. Need to decide on the technology stack.
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Week 2: December 15, 2025
+
+### Project Stage
+Requirement Analysis & Planning
+
+### Assigned Tasks
+Muhammad Amir Zarieff: Requirement analysis, technology stack selection (Flutter + Firebase), database schema design, basic UI/UX wireframes
+
+### Completion (%)
+35%
+
+### Problems
+Deciding between different state management solutions. Firebase setup and configuration learning curve.
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Week 3: December 22, 2025
+
+### Project Stage
+Design (UI & UX)
+
+### Assigned Tasks
+Muhammad Amir Zarieff: UI/UX design for all screens, navigation flow design, color scheme and branding, wireframes and mockups for login, home, scan, and activity tracker screens
+
+### Completion (%)
+45%
+
+### Problems
+Ensuring consistent design across all screens. Need to finalize the user flow for scan functionality.
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Week 4: December 29, 2025
+
+### Project Stage
+Development
+
+### Assigned Tasks
+Muhammad Amir Zarieff: Manual search feature implementation, educational guide page development, search functionality for materials
+
+### Completion (%)
+50%
+
+### Problems
+Sometimes there is no result found. I just add "No result found"
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Week 5: January 5, 2026
+
+### Project Stage
+Development
+
+### Assigned Tasks
+Muhammad Amir Zarieff: Firebase integration (Authentication & Firestore), user authentication implementation (Login/Register/Forget Password), scan screen with image picker, camera functionality
+
+### Completion (%)
+60%
+
+### Problems
+Image picker permissions on different Android versions. Need to optimize image processing for better performance.
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Week 6: January 12, 2026
+
+### Project Stage
+Development
+
+### Assigned Tasks
+Muhammad Amir Zarieff: CRUD operations implementation for recycling activities, scan history feature, points calculation system, data persistence with Firestore, activity tracker screen
+
+### Completion (%)
+70%
+
+### Problems
+Firestore query optimization needed for better performance. Real-time updates causing UI lag on large datasets.
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Week 7: January 19, 2026
+
+### Project Stage
+Development
+
+### Assigned Tasks
+Muhammad Amir Zarieff: Progress summary screen with charts (fl_chart), weekly/monthly analytics implementation, material breakdown visualization, bug fixes and UI improvements
+
+### Completion (%)
+85%
+
+### Problems
+Chart rendering issues on small screen devices. Date range calculations for weekly summary edge cases.
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Week 8: January 26, 2026
+
+### Project Stage
+Development
+
+### Assigned Tasks
+Muhammad Amir Zarieff: Comprehensive testing (unit, widget, integration), technical feasibility assessment documentation, implementation guide creation, final bug fixes and optimization
+
+### Completion (%)
+95%
+
+### Problems
+Need to add more error handling for edge cases. Documentation formatting and diagram creation took longer than expected.
+
+### Github Repo URL
+https://github.com/AmirZarieff/RecycleMate
+
+---
+
+## Project Timeline Summary
+
+| Week | Date | Stage | Completion | Key Milestone |
+|------|------|-------|------------|---------------|
+| 1 | Dec 8, 2025 | Ideation & Initiation | 20% | Project concept finalized |
+| 2 | Dec 15, 2025 | Requirement Analysis & Planning | 35% | Tech stack selected |
+| 3 | Dec 22, 2025 | Design (UI & UX) | 45% | UI/UX design completed |
+| 4 | Dec 29, 2025 | Development | 50% | Search feature added |
+| 5 | Jan 5, 2026 | Development | 60% | Firebase & scan functionality |
+| 6 | Jan 12, 2026 | Development | 70% | CRUD operations complete |
+| 7 | Jan 19, 2026 | Development | 85% | Analytics & charts |
+| 8 | Jan 26, 2026 | Development | 95% | Testing & documentation complete |
+
+---
+
+## Overall Project Status
+
+**Developer:** Muhammad Amir Zarieff  
+**Current Date:** February 3, 2026  
+**Project Status:** ✅ Near Completion  
+**Total Completion:** 95%  
+
+### Completed Features:
+- ✅ User Authentication (Login/Register/Password Reset)
+- ✅ Manual Search Feature
+- ✅ Educational Guide
+- ✅ Scan Screen with Camera
+- ✅ Activity Tracker with CRUD Operations
+- ✅ Scan History
+- ✅ Progress Summary with Charts
+- ✅ Firebase Integration (Auth + Firestore)
+- ✅ Technical Documentation
+
+### Remaining Tasks:
+- Push notifications
+- Offline mode support
+- Additional testing
+- App deployment preparation
+
+### Muhammad Amir Zarieff's Key Achievements:
+- Successfully implemented full CRUD operations
+- Integrated Firebase for backend services
+- Created comprehensive technical documentation
+- Built responsive UI for Android and iOS
+- Implemented data visualization with charts
+
+---
+
+**Last Updated:** February 3, 2026
+
+
+
